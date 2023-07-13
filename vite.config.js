@@ -6,14 +6,14 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	server: {
-		proxy: {
-		  "/api": {
-			target: "localhost",
-			changeOrigin: true,
-			secure: false,
-			rewrite: (path) => path.replace(/^\/api/, ""),
-		  },
-		},
-	  },
+	// server: {
+	// 	proxy: {
+	// 	  "/api": {
+	// 		target: "localhost",
+	// 		changeOrigin: true,
+	// 		secure: false,
+	// 		rewrite: (path) => path.replace(/^\/api/, ""),
+	// 	  },
+	// 	},
+	//   },
 });
