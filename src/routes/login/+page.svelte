@@ -3,7 +3,6 @@
     import { Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
     import { curruser, state} from '../../stores/store';
-	import { get } from 'svelte/store';
     let user={
         name:"",
         password:""
@@ -24,12 +23,13 @@
 			},
 			body: JSON.stringify(datarray)
 		});
+		console.log(response);
 		return await response.json();
 	}
 	async function handlelogin() {
 		
 		let temp = await proxyhandlelogin();
-		//console.log(temp);
+		console.log(temp);
 		if (temp.error_code != 0) {
 			alert('Could not log in. Try Again');
 			user.name = '';
@@ -37,8 +37,9 @@
 		} else  {
 			alert('Logged in');
 			state.set(1);
+			$curruser.key=temp.name;
 			$curruser.name=user.name;
-			console.log(document.cookie)
+			//console.log(document.cookie)
 			//console.log($curruser);
 			//console.log(user);
 			//console.log($curruser.image);
