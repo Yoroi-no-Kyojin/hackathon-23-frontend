@@ -34,7 +34,7 @@
        {:else}
       <NavLi href="/registration">Vaccine Registration</NavLi>
       {/if}
-      <NavLi href="/contact">Contact</NavLi>  
+      <NavLi href="/contacts">About Us</NavLi>  
       
     </NavUl>
     {#if $state==1}

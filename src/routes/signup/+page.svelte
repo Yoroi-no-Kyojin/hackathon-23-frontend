@@ -25,7 +25,7 @@
 		// }
 		// console.log(user);
 		//console.log(dataArray);
-		let endpoint = 'http://localhost:3000/sign-up';
+		let endpoint = 'https://vaccination-webapp.azurewebsites.net/sign-up';
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {

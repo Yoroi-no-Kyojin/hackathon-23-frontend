@@ -1,6 +1,5 @@
 <script>
     import { Label, } from 'flowbite-svelte';
-    import { goto } from '$app/navigation';
     import { curruser, state} from '../../stores/store';
     import { Button, Select } from 'flowbite-svelte'
 	let vaccine_id=0;
@@ -25,7 +24,7 @@
 		// }
 		// console.log(user);
 		//console.log(dataArray);
-		let endpoint = 'http://localhost:3000/vaccine-registration';
+		let endpoint = 'https://vaccination-webapp.azurewebsites.net/vaccine-registration';
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
