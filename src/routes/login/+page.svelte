@@ -1,5 +1,5 @@
 <script>
-    import { Label, Input } from 'flowbite-svelte';
+    import { Label, Input, Select } from 'flowbite-svelte';
     import { Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
     import { curruser, state} from '../../stores/store';
@@ -7,11 +7,25 @@
         name:"",
         password:""
     }
+	let acctypes=[
+      {value:'user',name:'Normal User'},
+      {value:'doc',name:"Doctor"}
+    ]
+	let utype=""
     async function proxyhandlelogin() {
 		//console.log(user);
+		let type=-1;
+		if(utype=="user")
+		{
+			type=0;
+		}
+		else if(utype="doc")
+		{
+			type=1;
+		}
 		const datarray=
 		{
-			type: 0,
+			type: type,
 			name: user.name,
 			password_hash: user.password
 		}
@@ -58,6 +72,15 @@
     <Label for='login'  class='block mb-2'>Login Page</Label>
   </div>
   {#if $state == 0}
+  <Label>Select usertype
+    <Select class="mt-2" items={acctypes} bind:value={utype} />
+    </Label>
+	{#if utype!=""}
+	{#if utype == "user"}
+	<Label>Provide User Login info</Label>
+	{:else}
+	<Label>Provide Doctor Login info</Label>
+	{/if}
   <div class='mb-6'>
     <Label for='Name' class='block mb-2'>Name</Label>
     <Input bind:value={user.name}  id='name' placeholder="Enter user-name" />
@@ -70,6 +93,7 @@
   <div class='flex items-center justify-center'>
   <Button on:click={handlelogin} href="/">Login</Button>
 </div>
+{/if}
 {:else}
 <div class='flex items-center justify-center'>
     <Label for='loggedin'  class='block mb-2'>You are already logged in.</Label>

@@ -1,19 +1,32 @@
 <script>
-    import { Label, Input } from 'flowbite-svelte';
+    import { Label, Input,Select } from 'flowbite-svelte';
     import { Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
-    import { curruser, state} from '../../stores/store';
+	import { usertype } from '../../stores/store';
     let user={
         name:"",
         address:"",
         nid:"",
         password:""
     }
-
+    let acctypes=[
+      {value:'user',name:'Normal User'},
+      {value:'doc',name:"Doctor"}
+    ]
+    let utype=""
     async function proxysignup() {
+      let type=-1;
+      if(utype=="user")
+      {
+        type=0;
+      }
+      else
+      {
+        type=1;
+      }
 		const dataArray = 
 		{
-			type: 0,
+			type: type,
 			name: user.name,
 			password_hash: user.password,
 			address: user.address,
@@ -46,12 +59,23 @@
 			goto('/login');
 		}
 	}
+
+
   </script>
   <div class='flex items-center justify-center'>
     
     <Label for='signup'  class='block mb-2'>Signup Page</Label>
   </div>
-  
+  <Label>Select usertype
+    <Select class="mt-2" items={acctypes} bind:value={utype} />
+    </Label>
+    {#if utype!=""}
+    {#if utype="user"}
+    <Label>Provide User Signup Information </Label>
+    {:else}
+    <Label>Provide Doctor Signup Information </Label>
+    {/if}    
+    <Label>User Signup Information</Label>
   <div class='mb-6'>
     <Label for='Name' class='block mb-2'>Name</Label>
     <Input bind:value={user.name} id='name' placeholder="Enter user-name" />
@@ -71,3 +95,4 @@
   <div class='flex items-center justify-center'>
   <Button on:click={handlesignup} href="/">Signup</Button>
 </div>
+{/if}

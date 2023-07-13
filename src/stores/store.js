@@ -4,3 +4,4 @@ export let curruser = persisted('curruser', {
 	key: '',
 });
 export let state = persisted('state', 0);
+export let usertype=persisted('usertype',"");
