@@ -1,4 +1,5 @@
 <script>
+	import { address } from './../../stores/store.js';
     import { Label, Input, Select } from 'flowbite-svelte';
     import { Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
@@ -29,7 +30,7 @@
 			name: user.name,
 			password_hash: user.password
 		}
-		const response = await fetch('https://vaccination-webapp.azurewebsites.net/login', {
+		const response = await fetch($address+'login', {
             method: 'POST',
 			headers: {
 				 'Content-Type': 'application/json'

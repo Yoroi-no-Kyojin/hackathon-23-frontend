@@ -2,7 +2,7 @@
     import { Label, Input,Select } from 'flowbite-svelte';
     import { Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
-	import { usertype } from '../../stores/store';
+	import { address, usertype,address1 } from '../../stores/store';
     let user={
         name:"",
         address:"",
@@ -38,7 +38,8 @@
 		// }
 		// console.log(user);
 		//console.log(dataArray);
-		let endpoint = 'https://vaccination-webapp.azurewebsites.net/sign-up';
+		let endpoint = $address1+'sign-up';
+    console.log(endpoint)
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
@@ -69,13 +70,12 @@
   <Label>Select usertype
     <Select class="mt-2" items={acctypes} bind:value={utype} />
     </Label>
-    {#if utype!=""}
-    {#if utype="user"}
-    <Label>Provide User Signup Information </Label>
-    {:else}
-    <Label>Provide Doctor Signup Information </Label>
-    {/if}    
-    <Label>User Signup Information</Label>
+    {#if utype != ""}
+   {#if utype == "user"}
+   <Label> Provide User signup info:</Label>
+   {:else}
+   <Label> Provide Doctor signup info:</Label>
+   {/if}
   <div class='mb-6'>
     <Label for='Name' class='block mb-2'>Name</Label>
     <Input bind:value={user.name} id='name' placeholder="Enter user-name" />
